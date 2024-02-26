@@ -3,10 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brown Noise Player</title>
+    <title>Ocean Sounds</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #dbe7f2; /* Light pastel blue */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        h1 {
+            color: #333; /* Dark gray */
+            margin-bottom: 30px;
+            font-size: 36px;
+        }
+        h2 {
+            color: #4a90e2; /* Pastel blue */
+            margin-top: 20px;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #8ed1f5; /* Light pastel blue */
+            color: #333; /* Dark gray */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #6dbbe9; /* Slightly darker pastel blue on hover */
+        }
+        text {
+            color: #333; /* Dark gray */
+            margin-bottom: 10px;
+            display: block;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <button id="playButton">Play Brown Noise</button>
+    <h1>Liz Radway HW3</h1>
+    <h2>Part 1: Babbling Brook</h2>
+    <button id="playButton">Play Babbling Brook</button>
+
+    <br>
+    
+    <text>In class partner: Lucia Saignac</text>
+    <h2>Part 2: Bounce Sound</h2>
+    <button id="bounceButton">Play Bounce Sound</button>
+    
+    <h2>Part 3:</h2>
+    <text>
+        In this lab, I aimed to recreate the sound of the ocean (one of my favorite sounds!!).
+        I started out with Brown Noise in order to mimic the entropic complexity of water
+        I then added two low pass filters, in order to remove high frequencies, mimicing the low pitch of ocean waves roars.
+        On top of that, I added a high pass filter in order to 
+    </text>
+    <text></text>
+
     <script src="main.js"></script>
 </body>
 </html>

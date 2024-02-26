@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(event) {
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     
-    // Function to create Brown noise buffer source
     function createBrownNoise() {
         const bufferSize = 10 * audioCtx.sampleRate;
         const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
@@ -22,7 +21,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
         return brownNoise;
     }
 
-    // Function to create low-pass filter
     function createLowPassFilterNode(cutoffFrequency) {
         const filterNode = audioCtx.createBiquadFilter();
         filterNode.type = 'lowpass';
@@ -30,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         return filterNode;
     }
 
-    // Function to create high-pass filter
+
     function createHighPassFilterNode(cutoffFrequency) {
         const filterNode = audioCtx.createBiquadFilter();
         filterNode.type = 'highpass';
@@ -38,14 +36,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
         return filterNode;
     }
 
-    // Connect and play the audio
-    function playAudio() {
+    function playBabblingBrook() {
         const brownNoise = createBrownNoise();
         const lowPassFilter1 = createLowPassFilterNode(400);
         const lowPassFilter2 = createLowPassFilterNode(14);
         const highPassFilter = createHighPassFilterNode(500);
 
-        // Connect the audio nodes
         brownNoise.connect(lowPassFilter1);
         brownNoise.connect(lowPassFilter2);
         lowPassFilter1.connect(highPassFilter);
@@ -55,10 +51,39 @@ document.addEventListener("DOMContentLoaded", function(event) {
         brownNoise.start();
     }
 
+    function playSingularBounce() {
+        const audioCtx = new AudioContext();
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+    
+        oscillator.type = 'sine';
+        
+        oscillator.frequency.setValueAtTime(400, audioCtx.currentTime);
+        oscillator.frequency.linearRampToValueAtTime(200, audioCtx.currentTime + 0.1);
+        oscillator.frequency.linearRampToValueAtTime(300, audioCtx.currentTime + 0.2);
+        oscillator.frequency.linearRampToValueAtTime(100, audioCtx.currentTime + 0.3);
+        oscillator.frequency.linearRampToValueAtTime(150, audioCtx.currentTime + 0.4);
+        
+        oscillator.connect(gainNode);
+    
+        gainNode.connect(audioCtx.destination);
+        gainNode.gain.setValueAtTime(1, audioCtx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5); 
+    
+        oscillator.start(audioCtx.currentTime); 
+        oscillator.stop(audioCtx.currentTime + 0.5);
+    }
+
+
     document.getElementById('playButton').addEventListener('click', function() {
-        // Start playing the audio
-        playAudio();
-        // Disable the button after it's clicked to prevent multiple playbacks
+        playBabblingBrook();
+        this.disabled = true;
+    });
+
+    document.getElementById('bounceButton').addEventListener('click', function() {
+        setInterval(() => {
+            playSingularBounce();
+        }, 750);
         this.disabled = true;
     });
 });
